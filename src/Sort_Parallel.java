@@ -1,2 +1,2 @@
-public class Sort_Parallel {
+class Sort_Parallel {
 }

@@ -7,5 +7,6 @@ public class Main {
        sort_serial.selectionSort(data);
        sort_serial.insertSort(data);
        sort_serial.shellSort(data);
+       sort_serial.mergeSort(data);
     }
 }

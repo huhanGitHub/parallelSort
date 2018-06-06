@@ -1,6 +1,4 @@
-import java.util.LinkedList;
-
-public class Sort_Serial {
+class Sort_Serial {
 //串行冒泡排序
     public int [] bubbleSort(int data[]){
         int n=data.length;
@@ -77,6 +75,57 @@ public class Sort_Serial {
         Util.print(data);
         return data;
     }
+
+    //MergeSort
+    private void merge(int[] data,int left,int mid,int right){
+        int n=mid-left+1;
+        int m=right-mid;
+        int []merge=new int[n+m];
+        int i=left,j=mid,k=0;
+        while ( i<n  && j<m){
+            if (data[i]<=data[j]){
+                merge[k]=data[i];
+                k++;
+                i++;
+            }else{
+                merge[k]=data[j];
+                k++;
+                j++;
+            }
+        }
+        while (i<n){
+            merge[k]=data[i];
+            k++;
+            i++;
+        }
+        while (j<m){
+            merge[k]=data[j];
+            k++;
+            j++;
+        }
+
+        for (int ii=0;ii<m+n;ii++){
+            data[left]=merge[ii];
+            left++;
+        }
+    }
+
+    private void mergeAll(int[]data,int left,int right){
+        if (left==right) return;
+        int mid=(left+right)/2;
+        mergeAll(data,left,mid);
+        mergeAll(data,mid+1,right);
+        merge(data,left,mid,right);
+    }
+
+    public int[] mergeSort(int []data){
+        int left=0;
+        int right=data.length-1;
+        mergeAll(data,left,right);
+        Util.print(data);
+        return data;
+    }
+
 
 
 }
