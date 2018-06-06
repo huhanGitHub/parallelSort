@@ -6,6 +6,6 @@ public class Main {
        sort_serial.bubbleSort(data);
        sort_serial.selectionSort(data);
        sort_serial.insertSort(data);
-       sort_serial.ShellSort(data);
+       sort_serial.shellSort(data);
     }
 }

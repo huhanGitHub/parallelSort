@@ -53,7 +53,7 @@ public class Sort_Serial {
     }
 
     //希尔排序
-    public int []ShellSort(int[] data){
+    public int []shellSort(int[] data){
         int n=data.length;
         if (n==0) return null;
         int h=0;
