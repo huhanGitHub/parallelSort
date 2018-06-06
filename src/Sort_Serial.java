@@ -17,10 +17,10 @@ class Sort_Serial {
         int n=data.length;
         if (n==0) return null;
         int min;
-        for (int i=0;i<n;i++){
+        for (int i=0;i<n-1;i++){
             min=i;
             for (int j=i+1;j<n;j++){
-                if(data[j]<min) {
+                if(data[j]<data[min]) {
                     min=j;
                 }
             }
@@ -40,7 +40,7 @@ class Sort_Serial {
         for (int i=1;i<n;i++){
             j=i-1;
             temp=data[i];
-            while (j>0 && temp<data[j]){
+            while (j>=0 && temp<data[j]){
                 data[j+1]=data[j];
                 j--;
             }
@@ -63,7 +63,7 @@ class Sort_Serial {
             for (int i=h;i<n;i++){
                 j=i-h;
                 temp=data[i];
-                while (j<=0 && data[i]>temp){
+                while (j>=0 && data[i]>temp){
                     data[j+h]=data[j];
                     j=j-h;
                 }
@@ -81,8 +81,8 @@ class Sort_Serial {
         int n=mid-left+1;
         int m=right-mid;
         int []merge=new int[n+m];
-        int i=left,j=mid,k=0;
-        while ( i<n  && j<m){
+        int i=left,j=mid+1,k=0;
+        while ( i<=mid  && j<=right){
             if (data[i]<=data[j]){
                 merge[k]=data[i];
                 k++;
@@ -93,12 +93,12 @@ class Sort_Serial {
                 j++;
             }
         }
-        while (i<n){
+        while (i<=mid){
             merge[k]=data[i];
             k++;
             i++;
         }
-        while (j<m){
+        while (j<=right){
             merge[k]=data[j];
             k++;
             j++;
