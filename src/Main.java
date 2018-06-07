@@ -12,5 +12,8 @@ public class Main {
        //sort_serial.shellSort(data3);
        int[] data4={1,4,7,2,5,8,3,6,9,0,-9,-5,89,45,12,789,3,7498,-7845,-46,-5};
        sort_serial.mergeSort(data4);
+       int[] data5={1,4,7,2,5,8,3,6,9,0,-9,-5,89,45,12,789,3,7498,-7845,-46,-5,666,45,-78,45,2,78,77,77};
+       sort_serial.heapSort(data5);
+
     }
 }

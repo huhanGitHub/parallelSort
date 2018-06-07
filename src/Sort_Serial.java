@@ -76,7 +76,7 @@ class Sort_Serial {
         return data;
     }
 
-    //MergeSort
+    //归并排序
     private void merge(int[] data,int left,int mid,int right){
         int n=mid-left+1;
         int m=right-mid;
@@ -123,6 +123,42 @@ class Sort_Serial {
         int right=data.length-1;
         mergeAll(data,left,right);
         Util.print(data);
+        return data;
+    }
+
+//堆排序
+    private void adjustHeap(int data[],int i,int size){
+        int left=2*i+1;
+        int right=2*i+2;
+        int max=i;
+        if (left<size && data[left]>data[max]){
+            max=left;
+        }
+        if (right<size && data[right]>data[max]){
+            max=right;
+        }
+        if (max!=i){
+            Util.swap(data,max,i);
+            adjustHeap(data,max,size);
+        }
+    }
+     private void buildHeap(int data[]){
+        int n=data.length;
+        for (int i=n/2-1;i>=0;i--){
+            adjustHeap(data,i,n);
+        }
+    }
+
+    public int[] heapSort(int data[]){
+         int n=data.length;
+         if (n==0) return null;
+         buildHeap(data);
+
+         for (int i=n-1;i>0;i--){
+             Util.swap(data,0,i);
+             adjustHeap(data,0,i);
+         }
+         Util.print(data);
         return data;
     }
 
