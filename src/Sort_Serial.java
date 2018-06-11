@@ -162,6 +162,37 @@ class Sort_Serial {
         return data;
     }
 
+    //快排
+    private void quick(int []data,int begin,int end){
+        if (begin>=end) return;
+        if (begin<0) return;
+        if (end>data.length-1) return;
+        int i=begin,j=end,base=begin;
+        while (i<j){
+            while (data[j]>=data[base] && i<j){
+                j--;
+            }
+            Util.swap(data,base,j);
+            base=j;
+            while (data[i]<=data[base] && i<j){
+                i++;
+            }
+            Util.swap(data,base,i);
+            base=i;
+        }
+        quick(data,begin,base-1);
+        quick(data,base+1,end);
+    }
+
+    public int []quickSort(int []data){
+        int n=data.length;
+        if (n==0) return null;
+        int i=0,j=n-1;
+        quick(data,i,j);
+        Util.print(data);
+        return data;
+    }
+
 
 
 }
