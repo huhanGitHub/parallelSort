@@ -1,6 +1,7 @@
 class Sort_Serial {
 //串行冒泡排序
     public int [] bubbleSort(int data[]){
+        long beginMilli=System.currentTimeMillis();
         int n=data.length;
         if (n==0) return null;
         for (int i=0;i+1<n;i++)
@@ -8,12 +9,13 @@ class Sort_Serial {
                 if (data[j]>data[j+1])
                     Util.swap(data,j,j+1);
             }
-        Util.print(data);
+        Util.print(data,beginMilli,"bubbleSort_serial");
         return data;
     }
 
 //串行选择选择排序
     public int [] selectionSort(int data[]){
+        long beginMilli=System.currentTimeMillis();
         int n=data.length;
         if (n==0) return null;
         int min;
@@ -28,12 +30,13 @@ class Sort_Serial {
                 Util.swap(data,i,min);
             }
         }
-        Util.print(data);
+        Util.print(data,beginMilli,"selectionSort_serial");
         return data;
     }
 
     //串行插入排序
     public int [] insertSort(int data[]){
+        long beginMilli=System.currentTimeMillis();
         int n=data.length;
         if (n==0) return null;
         int j,temp;
@@ -46,12 +49,13 @@ class Sort_Serial {
             }
             data[j+1]=temp;
         }
-        Util.print(data);
+        Util.print(data,beginMilli,"insertSort_serial");
         return data;
     }
 
     //希尔排序
     public int []shellSort(int[] data){
+        long beginMilli=System.currentTimeMillis();
         int n=data.length;
         if (n==0) return null;
         int h=0;
@@ -72,7 +76,7 @@ class Sort_Serial {
             h=(h-1)/3;
         }
 
-        Util.print(data);
+        Util.print(data,beginMilli,"shellSort_serial");
         return data;
     }
 
@@ -119,10 +123,11 @@ class Sort_Serial {
     }
 
     public int[] mergeSort(int []data){
+        long beginMilli=System.currentTimeMillis();
         int left=0;
         int right=data.length-1;
         mergeAll(data,left,right);
-        Util.print(data);
+        Util.print(data,beginMilli,"mergeSort_serial");
         return data;
     }
 
@@ -150,6 +155,7 @@ class Sort_Serial {
     }
 
     public int[] heapSort(int data[]){
+        long beginMilli=System.currentTimeMillis();
          int n=data.length;
          if (n==0) return null;
          buildHeap(data);
@@ -158,7 +164,7 @@ class Sort_Serial {
              Util.swap(data,0,i);
              adjustHeap(data,0,i);
          }
-         Util.print(data);
+        Util.print(data,beginMilli,"heapSort_serial");
         return data;
     }
 
@@ -185,11 +191,12 @@ class Sort_Serial {
     }
 
     public int []quickSort(int []data){
+        long beginMilli=System.currentTimeMillis();
         int n=data.length;
         if (n==0) return null;
         int i=0,j=n-1;
         quick(data,i,j);
-        Util.print(data);
+        Util.print(data,beginMilli,"quickSort_serial");
         return data;
     }
 
