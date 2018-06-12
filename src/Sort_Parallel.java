@@ -7,72 +7,63 @@ class Sort_Parallel {
     void mergeSort(int data[]){
         long beginMilli=System.currentTimeMillis();
         ForkJoinPool pool=new ForkJoinPool();
-        MergeSortTask task=new MergeSortTask(data);
-        ForkJoinTask<int []> taskResult=pool.submit(task);
+        MergeSortTask task=new MergeSortTask(data,0,data.length-1);
+        ForkJoinTask taskResult=pool.submit(task);
         try {
-            Util.print(taskResult.get(),beginMilli,"mergeSort_parallel");
+            taskResult.get();
+            Util.print(data,beginMilli,"mergeSort_parallel");
         }catch (InterruptedException | ExecutionException e){
             e.printStackTrace(System.out);
         }
     }
 
-    private class MergeSortTask extends RecursiveTask<int []>{
+    private class MergeSortTask extends RecursiveAction{
         private int data[];
-        public MergeSortTask(int data[]){
+        private int left;
+        private int right;
+        public MergeSortTask(int data[],int left,int right){
             this.data=data;
+            this.left=left;
+            this.right=right;
         }
 
         @Override
-        protected int[] compute() {
-            int sourceLen=data.length;
+        protected void compute() {
+            int sourceLen=right-left+1;
             if (sourceLen>2){
-                int mid=sourceLen/2;
-                MergeSortTask task1=new MergeSortTask(Arrays.copyOf(data,mid));
+                int mid=(left+right)/2;
+                MergeSortTask task1=new MergeSortTask(data,left,mid);
                 task1.fork();
-                MergeSortTask task2=new MergeSortTask(Arrays.copyOfRange(data,mid,sourceLen));
+                MergeSortTask task2=new MergeSortTask(data,mid+1,right);
                 task2.fork();
 
-                int result1[]=task1.join();
-                int result2[]=task2.join();
-                int merge[]=joinInts(result1,result2);
-                return merge;
+                task1.join();
+                task2.join();
+                joinInts(data,left,mid,right);
             }else {
-                if (sourceLen==1 || data[0]<data[1]){
-                    return data;
-                }else {
-                    int target[]=new int[sourceLen];
-                    target[0]=data[1];
-                    target[1]=data[0];
-                    return target;
-                }
+                int mid=(left+right)/2;
+                joinInts(data,left,mid,right);
             }
         }
 
-        private int[] joinInts(int[] result1, int[] result2) {
-            int left=0;
-            int right=0;
-            int[] merge=new int[result1.length+result2.length];
-            if (merge.length==0) return null;
-            for(int i=0;i<result1.length+result2.length;i++){
-                if (result1.length==left){
-                    merge[i]=result2[right];
-                    right++;
-                    continue;
-                }
-                else if (result2.length==right){
-                    merge[i]=result1[left];
-                    left++;
-                    continue;
-                }
-                if (result1[left]<=result2[right]){
-                    merge[i]=result1[left];
-                    left++;
-                }else {
-                    merge[i]=result2[right];
-                    right++;
-                }
+        private void joinInts(int data[],int left,int mid,int right) {
+            int len=right-left+1;
+            int[] merge=new int[len];
+            if (merge.length<=0) return;
+            int i=left,j=mid+1;
+            int index=0;
+            while(i<=mid && j<=right){
+                merge[index++]=data[i]<=data[j]?data[i++]:data[j++];
             }
-            return merge;
+            while (i<=mid){
+                merge[index++]=data[i++];
+            }
+            while (j<=right){
+                merge[index++]=data[j++];
+            }
+            for(int k=0;k<merge.length;k++){
+                data[left++]=merge[k];
+            }
         }
     }
 

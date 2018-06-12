@@ -10,9 +10,9 @@ public class Util {
     }
 
     static void print(int data[],long beginMillis,String name){
-        for (int i=0;i<data.length;i++)
-            System.out.print(data[i]+" ");
-        System.out.println();
+//        for (int i=0;i<data.length;i++)
+//            System.out.print(data[i]+" ");
+//        System.out.println();
 
         long endMillis=System.currentTimeMillis();
         long used=endMillis-beginMillis;
