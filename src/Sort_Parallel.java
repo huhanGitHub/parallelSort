@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.concurrent.*;
 
 class Sort_Parallel {
@@ -55,9 +54,7 @@ class Sort_Parallel {
             while(i<=mid && j<=right){
                 merge[index++]=data[i]<=data[j]?data[i++]:data[j++];
             }
-            while (i<=mid){
-                merge[index++]=data[i++];
-            }
+            while (i<=mid) merge[index++] = data[i++];
             while (j<=right){
                 merge[index++]=data[j++];
             }

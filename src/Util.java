@@ -6,7 +6,6 @@ public class Util {
         temp=data[a];
         data[a]=data[b];
         data[b]=temp;
-        //System.out.println(a+"--"+b);
     }
 
     static void print(int data[],long beginMillis,String name){

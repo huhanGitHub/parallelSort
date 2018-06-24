@@ -1,7 +1,7 @@
 public class Main {
 
     public static void main(String[] args) {
-        int length=100000;
+        int length=200000000;
         Sort_Serial sort_serial=new Sort_Serial();
         Sort_Parallel sort_parallel=new Sort_Parallel();
         int []data=Util.getRandomData(length);
@@ -37,18 +37,18 @@ public class Main {
         int []data8=new int[length];
         for (int i=0;i<length;i++)
             data8[i]=data[i];
-        sort_serial.bubbleSort(data1);
+        //sort_serial.bubbleSort(data1);
 
-        sort_serial.selectionSort(data2);
+        //sort_serial.selectionSort(data2);
 
-        sort_serial.insertSort(data3);
+        //sort_serial.insertSort(data3);
 
-        sort_serial.heapSort(data4);
+        //sort_serial.heapSort(data4);
 
-        sort_serial.mergeSort(data5);
+        //sort_serial.mergeSort(data5);
         sort_parallel.mergeSort(data6);
 
-        sort_serial.quickSort(data7);
+        //sort_serial.quickSort(data7);
         sort_parallel.quickSort(data8);
     }
 }
